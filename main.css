@@ -36,9 +36,11 @@
     border: 1px solid rgba(0, 95, 0, 0.555);
     padding-bottom: 10px;
     display: flex;
+    flex-direction: column;
     /* justify-content: center; */
     align-items: center;
     text-indent: 10px;
+    text-align: center;
 }
 button {
     width: 40px;
