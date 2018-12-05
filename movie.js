@@ -2,13 +2,18 @@ let API = "a49f54f4";
 
 let input_value;
 
-let pushe = document.querySelector(".pushe");
-let remplir = document.querySelector(".remplissage");
+let pushe = document.querySelector(".find1");
+let reset = document.querySelector(".reset");
+let remplirImage = document.querySelector(".remplissageImage");
+let remplirText = document.querySelector(".remplissageText");
+
+let defaultImage ="https://giphy.com/gifs/sorry-shame-my-bad-3ohc1ffY03hnhRUyUU";
 
 let titre = " ";
 // document.querySelector('#choper').value;
 let idFilm = "";
 let a = " ";
+let b = "";
 
 //----------------- fonction prendre la valeur entree ------------
 let capcha = document.querySelector("#choper");
@@ -26,12 +31,24 @@ function clicked() {
 
             console.log(response.Plot);
             a += `
-                <p>${response.Plot}</p>
+                <p id="pimg">${response.Plot}</p>
                 `
-            remplir.innerHTML = a;
-
+                b += `
+                <img id="ptext" src=${response.Poster} onerror="this.onerror=null;this.src=${defaultImage};" /></p>
+                `
+              
+            remplirImage.innerHTML = b;
+            remplirText.innerHTML = a;
+            
         });
 
+}
+
+let resetMe = () => {
+    // removeImg=document.querySelector("#pimg");
+    // removeText=document.querySelector("#ptext");
+    remplirImage.innerHTML="";
+    remplirText.innerHTML="";
 }
 
 //TEST fetch image //
@@ -98,3 +115,4 @@ function clicked() {
 
 // capcha.addEventListener('keyup', clicked);
 pushe.addEventListener('click', clicked);
+reset.addEventListener('click', resetMe);
