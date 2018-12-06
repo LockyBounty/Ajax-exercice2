@@ -18,6 +18,14 @@ let b = "";
 //----------------- fonction prendre la valeur entree ------------
 let capcha = document.querySelector("#choper");
 
+let resetMe = () => {
+    let removeImg=document.querySelector("#listimg");
+    let removeText=document.querySelector("#listtxt");
+    // remplirImage.innerHTML="";
+    // remplirText.innerHTML="";
+    removeImg.removeChild(removeImg.childNodes[0]);
+    removeText.removeChild(removeText.childNodes[0]);
+}
 
 function clicked() {
     titre = document.querySelector('#choper').value;
@@ -31,25 +39,19 @@ function clicked() {
 
             console.log(response.Plot);
             a += `
-                <p id="pimg">${response.Plot}</p>
+                <li>${response.Plot}
                 `
                 b += `
-                <img id="ptext" src=${response.Poster} onerror="this.onerror=null;this.src=${defaultImage};" /></p>
+                <li><img id="ptext" src=${response.Poster} />
                 `
               
-            remplirImage.innerHTML = b;
-            remplirText.innerHTML = a;
+            document.querySelector("#listimg").innerHTML = b;
+            document.querySelector("#listtxt").innerHTML = a;
             
         });
 
 }
 
-let resetMe = () => {
-    // removeImg=document.querySelector("#pimg");
-    // removeText=document.querySelector("#ptext");
-    remplirImage.innerHTML="";
-    remplirText.innerHTML="";
-}
 
 //TEST fetch image //
 
