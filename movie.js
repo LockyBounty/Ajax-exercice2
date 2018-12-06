@@ -7,7 +7,7 @@ let reset = document.querySelector(".reset");
 let remplirImage = document.querySelector(".remplissageImage");
 let remplirText = document.querySelector(".remplissageText");
 
-let defaultImage ="https://giphy.com/gifs/sorry-shame-my-bad-3ohc1ffY03hnhRUyUU";
+let defaultImage = "https://giphy.com/gifs/sorry-shame-my-bad-3ohc1ffY03hnhRUyUU";
 
 let titre = " ";
 // document.querySelector('#choper').value;
@@ -16,39 +16,101 @@ let a = " ";
 let b = "";
 
 //----------------- fonction prendre la valeur entree ------------
-let capcha = document.querySelector("#choper");
+// let capcha = document.querySelector("#choper");
 
 let resetMe = () => {
-    let removeImg=document.querySelector("#listimg");
-    let removeText=document.querySelector("#listtxt");
-    // remplirImage.innerHTML="";
-    // remplirText.innerHTML="";
-    removeImg.removeChild(removeImg.childNodes[0]);
-    removeText.removeChild(removeText.childNodes[0]);
+    // let removeImg=document.querySelector(".remplissageImage");
+    // let removeText=document.querySelector(".remplissageText");
+    // // remplirImage.innerHTML="";
+    // // remplirText.innerHTML="";
+    // removeImg.removeChild(removeImg.childNodes[0]);
+    // removeText.removeChild(removeText.childNodes[0]);
+
+
+    location.reload();
 }
 
+let teste = " ";
+let titlesLoop = "";
+
+
+function find(obj){
+    console.log(obj);
+    findTitles = obj.value.toUpperCase();
+
+    // titre = document.querySelector('#choper').value;
+    fetch(`http://www.omdbapi.com/?apikey=${API}&s=${findTitles}`)
+
+
+            .then( res => { return res.json()}) //<--- on cree une variable qui va prendre les données du GET
+            .then(response =>  {
+
+                let responset = response.Search;
+
+                
+
+                for (i in responset){
+                    titlesLoop = responset[i].Title.toUpperCase();
+                    console.log(i);
+                    // console.log(titlesLoop);
+                    teste +=
+    
+                    `
+                    <option value="${titlesLoop}">
+                    
+                    `
+                    document.getElementById('selectList').innerHTML = teste;
+                         
+                }
+                
+            });
+              
+
+  
+}
+
+
+
+
+var counter = 0;
+
+var findTitles = " ";
 function clicked() {
-    titre = document.querySelector('#choper').value;
+ 
 
-    fetch(`http://www.omdbapi.com/?apikey=${API}&t=${titre}`)
+    if (counter === 0 ) {
 
-        .then(res => res.json()) //<--- on cree une variable qui va prendre les données du GET
-        .then(response => {
 
-            // console.log(response);
+        titre = document.querySelector('#choper').value;
 
-            console.log(response.Plot);
-            a += `
-                <li>${response.Plot}
+        fetch(`http://www.omdbapi.com/?apikey=${API}&t=${titre}`)
+
+            .then(res => res.json()) //<--- on cree une variable qui va prendre les données du GET
+            .then(response => {
+ 
+                // console.log(response);
+
+             
+
+                console.log(response.Plot);
+                a += `
+                <p>${response.Plot}</p>
                 `
                 b += `
-                <li><img id="ptext" src=${response.Poster} />
+                <p><img id="ptext" src=${response.Poster} /></p>
                 `
-              
-            document.querySelector("#listimg").innerHTML = b;
-            document.querySelector("#listtxt").innerHTML = a;
-            
-        });
+
+
+                document.querySelector(".remplissageImage").innerHTML = b;
+                document.querySelector(".remplissageText").innerHTML = a;
+                counter += 1;
+
+            });
+        
+    } else if (counter === 1) {
+        location.reload();
+        counter -= 1;
+    }
 
 }
 
@@ -118,3 +180,4 @@ function clicked() {
 // capcha.addEventListener('keyup', clicked);
 pushe.addEventListener('click', clicked);
 reset.addEventListener('click', resetMe);
+

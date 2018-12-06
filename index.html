@@ -17,17 +17,18 @@
         <div class="block1-1">
         <button class="find1">Find</button><button class="reset">Reset</button>
     </div>
-        <input type="text" placeholder="Enter your title" id="choper" value="">
+        <input type="text" placeholder="Enter your title" id="choper" value="" list="selectList" onkeyup="find(this)">
+        <!--on lie l'input avec le datalist par list 
+            // on envoie la valeur dans la fonction dans le fichier js avec find(this)"-->
+        <datalist id="selectList"></datalist> <!--Sert à faire une liste d'options qu'on va remplir avec l'API search-->
+        
+        <!-- <ul id="selectList"></ul> -->
         <div class="block1-2">
             <div class="remplissageImage">
-                <ul id=listimg>
-
-                </ul>
+                
             </div>
             <div class="remplissageText">
-                <ul id=listtxt>
-
-                </ul>
+              
             </div>
         </div>
         <script src="movie.js"></script>
